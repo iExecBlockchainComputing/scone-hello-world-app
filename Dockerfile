@@ -29,7 +29,8 @@ COPY ./utils/protect-fs.sh /protect-fs.sh
 RUN bash /protect-fs.sh /app
 RUN rm /protect-fs.sh /keytag
 
-### we need only to start the python interpreter
-### inside the enclave, the execution params will be
-### retrieved from the blockchain (the --params option)
-ENTRYPOINT python3
+### the entrypoint should match the params
+### attribute written on the blockchain
+### (the --params option of the "iexec app run"
+### command)
+ENTRYPOINT python3 /app/app.py
